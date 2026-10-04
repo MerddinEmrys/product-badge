@@ -1,0 +1,30 @@
+{
+    "name": "merddinemrys/product-badge",
+    "type": "magento2-module",
+    "description": "A module to add a product badge attribute and custom graphql query",
+    "minimum-stability": "stable",
+    "license": "proprietary",
+    "version": "1.0.0",
+    "authors": [
+        {
+            "name": "Rob Bowden",
+            "email": "merddinemrys598@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "magento/framework": "*",
+        "magento/module-catalog": "*",
+        "magento/module-eav": "*",
+        "magento/module-inventory-catalog": "*",
+        "magento/module-inventory-sales-api": "*"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "MerddinEmrys\\ProductBadge\\": ""
+        }
+    }
+}
