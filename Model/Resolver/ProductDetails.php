@@ -91,7 +91,7 @@ class ProductDetails implements ResolverInterface
             'name' => __($product->getName()),
             'price' => $price,
             'currency' => $currency,
-            'stock_status' => $this->getStockStatusForProduct($product),
+            'stock_status' => __($this->getStockStatusForProduct($product)),
             'badge' => __($badge)
         ];
     }
