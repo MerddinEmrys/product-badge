@@ -10,6 +10,7 @@ use Magento\Framework\GraphQl\Exception\GraphQlInputException;
 use Magento\Framework\GraphQl\Exception\GraphQlNoSuchEntityException;
 use Magento\Framework\GraphQl\Query\ResolverInterface;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
+use Magento\Framework\Pricing\PriceCurrencyInterface;
 use Magento\InventoryCatalog\Model\GetStockIdForCurrentWebsite;
 use Magento\InventorySalesApi\Api\AreProductsSalableInterface;
 
@@ -19,22 +20,35 @@ class ProductDetails implements ResolverInterface
      * @var ProductRepositoryInterface
      */
     protected ProductRepositoryInterface $productRepository;
+    /**
+     * @var GetStockIdForCurrentWebsite
+     */
     protected GetStockIdForCurrentWebsite $getStockIdForCurrentWebsite;
+    /**
+     * @var AreProductsSalableInterface
+     */
     protected AreProductsSalableInterface $areProductsSalable;
+    /**
+     * @var PriceCurrencyInterface
+     */
+    protected PriceCurrencyInterface $priceCurrency;
 
     /**
      * @param ProductRepositoryInterface $productRepository
      * @param GetStockIdForCurrentWebsite $getStockIdForCurrentWebsite
      * @param AreProductsSalableInterface $areProductsSalable
+     * @param PriceCurrencyInterface $priceCurrency
      */
     public function __construct(
         ProductRepositoryInterface $productRepository,
         GetStockIdForCurrentWebsite $getStockIdForCurrentWebsite,
-        AreProductsSalableInterface $areProductsSalable
+        AreProductsSalableInterface $areProductsSalable,
+        PriceCurrencyInterface $priceCurrency
     ) {
         $this->productRepository = $productRepository;
         $this->getStockIdForCurrentWebsite = $getStockIdForCurrentWebsite;
         $this->areProductsSalable = $areProductsSalable;
+        $this->priceCurrency = $priceCurrency;
     }
 
     /**
@@ -69,7 +83,7 @@ class ProductDetails implements ResolverInterface
             );
         }
 
-        $price = $product->getFinalPrice();
+        $price = $this->priceCurrency->convertAndRound($product->getFinalPrice(), $store->getId());
         $badge = $product->getAttributeText('badge');
 
         return [
