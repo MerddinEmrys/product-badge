@@ -3,6 +3,9 @@
     <module name="MerddinEmrys_ProductBadge">
         <sequence>
             <module name="Magento_Catalog"/>
+            <module name="Magento_Eav"/>
+            <module name="Magento_InventoryCatalog"/>
+            <module name="Magento_InventorySalesApi"/>
         </sequence>
     </module>
 </config>
