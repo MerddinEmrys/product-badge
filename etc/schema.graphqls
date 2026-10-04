@@ -1,0 +1,15 @@
+type Query {
+    productDetails (
+        sku: String
+    ): ProductDetails
+    @resolver(class: "MerddinEmrys\\ProductBadge\\Model\\Resolver\\ProductDetails")
+}
+
+type ProductDetails {
+    sku: String
+    name: String
+    price: Float
+    currency: String
+    stock_status: String
+    badge: String
+}
