@@ -10,7 +10,7 @@ class ProductPlugin
     {
         $badge = $subject->getAttributeText('badge');
         if ($badge) {
-            return sprintf("%s [%s]", $result, $badge);
+            return sprintf("%s [%s]", $result, __($badge));
         }
         return $result;
     }
